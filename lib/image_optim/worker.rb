@@ -124,7 +124,14 @@ class ImageOptim
 
       start = Time.now
 
-      success = run_command(cmd_args)
+      success = false
+
+      begin
+        success = run_command(cmd_args)
+      rescue SignalException
+        success = false
+      end
+
 
       if @image_optim.verbose
         seconds = Time.now - start
